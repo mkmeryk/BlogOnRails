@@ -1,0 +1,7 @@
+<h2> <%= @post.title %> </h2>
+<p> <%= @post.body %> </p>
+<p> <small>Created at:  <%= @post.created_at %> </small> </p>
+
+
+<%= link_to 'edit', edit_post_path %>
+<%= link_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
