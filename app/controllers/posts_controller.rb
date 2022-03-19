@@ -7,16 +7,21 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if@post.save
+
+    if @post.save
+
       flash[:notice] = "Post created!"
       redirect_to post_path(@post.id)
     else
-      render :new
+      render :new, status: 303
     end
+
   end
 
   def show
     # @post = Post.find params[:id]
+    @commetns = @post.comments
+    @comment = Comment.new
   end
 
   def index
@@ -26,11 +31,12 @@ class PostsController < ApplicationController
   def edit 
   end
 
-  def update
+  def update 
+  
     if @post.update(post_params)
       redirect_to post_path(@post.id)
     else
-      render :edit
+      render :edit, status: 303
     end
   end
 

@@ -1,6 +1,15 @@
-<h1>Feed</h1>
-<%= @posts.each do |post| %>
-    <div>
-        <h2> <%= link_to post.title, post_path(post) %> </h2>
-    </div>
-<% end %>
+<div class="d-flex flex-column">
+
+    <% @posts.each do |post| %>
+        
+        <div style=" margin-top: 1%;margin-bottom: 1%;margin-left: 1%;margin-right: 1%;" >
+            <div class="card" >
+                <h4> <%= link_to post.title, post_path(post) %> </h4>
+                <h6><%= post.body %> </h6>
+            </div>
+            
+        </div>
+
+    <% end %>
+
+</div>

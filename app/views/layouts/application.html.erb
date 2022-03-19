@@ -11,8 +11,18 @@
   </head>
 
   <body>
-    <%= link_to 'feed', posts_path %>
-    <%= link_to 'New Post', new_post_path %>
+
+
+    <nav class="navbar d-flex justify-content-between" style="background-color: #F0F7FB;">
+      <div >
+        <a class="navbar-brand" href="/">Blog On Rails</a>
+      </div>
+      <div>
+        <small> <a class="navbar-brand" href="/posts">Home</a> </small>
+        <small> <a class="navbar-brand " href="/posts/new">New Post</a> </small>
+      </div>
+    </nav>
+
     <%= yield %>
   </body>
   

@@ -1,7 +1,29 @@
 <h2> <%= @post.title %> </h2>
 <p> <%= @post.body %> </p>
-<p> <small>Created at:  <%= @post.created_at %> </small> </p>
+<p> <small>Created at:  <%= time_ago_in_words(@post.created_at) %> </small> </p>
 
 
-<%= link_to 'edit', edit_post_path %>
-<%= link_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+<%= button_to 'edit', edit_post_path(@post), method: :get %>
+<%= button_to 'delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+
+<h4>Comments</h4>
+
+<%= form_with(model:[@post, @comment]) do |f| %>
+    <div>
+        <%= f.label :body %>
+        <br>
+        <%= f.text_area :body, cols:50, rows: 5 %>
+    </div>
+    <%= f.submit "Comment" %>
+<% end %>
+
+<ul>
+    <% @commetns.each do |comment| %>
+    <li>
+        <%= comment.body %>
+        <small>Created at: <%= time_ago_in_words(comment.created_at) %> </small>
+        <%= button_to 'Delete', post_comment_path(@post.id,comment.id),method: :delete %> 
+    </li>
+    <% end %>
+    
+</ul>
