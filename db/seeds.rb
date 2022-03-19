@@ -13,13 +13,13 @@ Comment.destroy_all
     created_at = Faker::Date.backward(days: 365 * 5)
 
     post = Post.create(
-        title: Faker::Book.title,
-        body: Faker::Lorem.characters(number: 51)
+        title: Faker::Military.space_force_rank,
+        body: Faker::TvShows::BrooklynNineNine.quote
     )
     if post.valid?
         rand(1..5).times do
             Comment.create(
-                body: Faker::Hacker.say_something_smart, post: post
+                body: Faker::ChuckNorris.fact, post: post
             )
         end
     end

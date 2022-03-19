@@ -41,7 +41,7 @@ class PostsController < ApplicationController
   end
 
 
-  #destroy and update does not work
+
   def destroy
     @post.destroy
     redirect_to posts_path

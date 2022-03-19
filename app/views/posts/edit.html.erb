@@ -1,5 +1,25 @@
-<h1>Edit Your post</h1>
+<% if @post.errors.any? %>
+    <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+            <li>
+                <%= msg %>
+            </li>
+        <% end %>
+    </ul>
+<% end %>
 
-
-
-<%= render 'form' %>
+<%= form_with(model: @post) do |form| %>
+    <div>
+        <%= form.label :title %>
+        <br>
+        <%= form.text_field :title,class:"form-control" %>
+    </div>
+    <br>
+    <div>
+        <%= form.label :body %>
+        <br>
+        <%= form.text_area :body, cols: 50, rows: 2, class:"form-control" %>
+    </div>
+    <br>
+    <%= form.submit "Update Post", class:"btn btn-outline-primary" %>
+<% end %>

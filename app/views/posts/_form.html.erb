@@ -7,16 +7,19 @@
         <% end %>
     </ul>
 <% end %>
+
 <%= form_with(model: @post) do |form| %>
     <div>
         <%= form.label :title %>
         <br>
-        <%= form.text_field :title %>
+        <%= form.text_field :title,class:"form-control" %>
     </div>
+    <br>
     <div>
         <%= form.label :body %>
         <br>
-        <%= form.text_area :body, cols: 50, rows: 5 %>
+        <%= form.text_area :body, cols: 50, rows: 2, class:"form-control" %>
     </div>
-    <%= form.submit %>
+    <br>
+    <%= form.submit "Create Post", class:"btn btn-outline-primary" %>
 <% end %>
