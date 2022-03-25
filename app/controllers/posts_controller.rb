@@ -8,6 +8,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user = current_user
 
     if @post.save
 
@@ -44,8 +45,15 @@ class PostsController < ApplicationController
 
 
   def destroy
-    @post.destroy
-    redirect_to posts_path
+
+    if can?(:delete, @post)
+      @post.destroy
+      flash.alert = "Deleted the post"
+      redirect_to posts_path           
+  else
+      flash.notice = "Access denied"
+      redirect_to new_session_path
+  end
   end
 
   private
