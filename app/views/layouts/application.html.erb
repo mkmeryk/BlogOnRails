@@ -14,11 +14,23 @@
 
     
     <%if(user_signed_in?) %>
-      Hello <%= current_user.first_name%>, 
-      <%= button_to "Log out", sessions_path, method: :delete, class:"btn btn-primary" %>
+
+      <div class="d-flex justify-content-between p-2">
+        <h2>Hello <%= link_to "#{current_user.first_name}", edit_user_path(current_user) %></h2>
+        <%= button_to "Log out", sessions_path, method: :delete, class:"btn btn-primary" %>      
+      </div>
+
     <% else %>
-      <%= link_to 'Sign In Page', new_session_path%>
-      <%= link_to 'Sign Up Page', new_user_path%>
+
+      <div class="d-flex justify-content-end p-3 ">
+        <div class="p-1">
+          <%= link_to 'Sign In Page', new_session_path%>        
+        </div>
+        <div class="p-1">
+          <%= link_to 'Sign Up Page', new_user_path%>        
+        </div>
+      </div>
+
     <% end %>
     <% flash.each do |type, message| %>
       <%= type + "-------" + message %>
