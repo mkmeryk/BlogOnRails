@@ -9,5 +9,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :comments, only: [ :create, :destroy ]
   end
+  resources :users
+  resources :sessions, only:[ :new, :destroy, :create ]
+  delete "/sessions",to: "sessions#destroy", as: :session_delete
 
 end

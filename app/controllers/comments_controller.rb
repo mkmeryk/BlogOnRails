@@ -1,11 +1,13 @@
 class CommentsController < ApplicationController
 
     before_action :find_post
+    before_action :authenticate_user!
 
     def create
         @comment = Comment.new(params.require(:comment).permit(:body))
         # @post = Post.find params:[:comment_id]
         @comment.post = @post
+        @comment.user = current_user
         @comment.save
         if @comment.save
             redirect_to post_path(@post.id), status: 303
