@@ -1,0 +1,66 @@
+<div style=" margin-top: 1%;margin-bottom: 1%;margin-left: 1%;margin-right: 1%;">
+    <div>
+        <h1> <%= @post.title %> </h1>
+        <p> <%= @post.body %> </p>
+        <p> <small>Created at:  <%= time_ago_in_words(@post.created_at) %> </small> </p>
+        <p> <small> Created by: <%= @post.user.first_name %> </small> </p>
+        <div class="d-flex justify-content-start" >
+            <% if can? :crud,@post %>
+            
+                <div style=" margin-left: 1%;margin-right: 1%;">
+                    <%= button_to 'Edit', edit_post_path(@post), method: :get, class:"btn btn-outline-primary" %>  
+                </div>
+                <br>
+                <div style=" margin-left: 1%;margin-right: 1%;">
+                    <%= button_to 'Delete', post_path(@post), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-outline-primary" %>
+                </div>
+            <% end %>
+        </div>    
+    </div>
+    <br>
+    <div>
+        <div>
+
+            <%= form_with(model:[@post, @comment]) do |f| %>
+                <div>
+                    
+                    <%= f.label :comment %>
+                    <br>
+                    <%= f.text_area :body, cols:50, rows: 2, class:"form-control" %>
+                </div>
+                <br>
+                <div style=" margin-left: 1%;margin-right: 1%;">
+                    <%= f.submit "Comment" , class:"btn btn-outline-primary" %>
+                </div>
+                
+            <% end %>          
+        </div>
+        <br>
+        <div>
+            <ul>
+                <% @commetns.each do |comment| %>
+                <li>
+                    <div>
+                        <%= comment.body %>
+                    </div>
+                    <div class="d-flex">
+                    <small class="d-flex align-items-center">Created at: <%= time_ago_in_words(comment.created_at) %> Created by:  <%= comment.user.first_name %> </small>
+                    <% if can? :crud,comment %>
+                        <%= button_to 'Delete', post_comment_path(@post.id,comment.id),method: :delete, class:"text-primary btn btn-sm" %>
+                    <% end %>
+                    </div>
+                    
+                    
+                </li>
+                <% end %>
+            </ul>
+        </div>
+  
+    </div>
+
+    
+
+
+    
+</div>
+
